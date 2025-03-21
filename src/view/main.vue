@@ -5,15 +5,9 @@ import SongList from '../assets/json/song_list.json'
 
 const toast = useToast()
 const nowLang = ref('')
-const showSongList = ref()
 const searchContent = ref()
 const clientWidth = ref(document.documentElement.clientWidth)
 
-const { SongList } = storeToRefs(useStore())
-request({ url: '/song/all/index', method: 'get' }).then((res) => {
-  SongList.value = res.data.result
-  showSongList.value = SongList.value
-})
 const songList = ref(SongList)
 const showSongList = ref()
 showSongList.value = songList.value
