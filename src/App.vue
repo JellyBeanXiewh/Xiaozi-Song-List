@@ -92,7 +92,7 @@ function scrollWatch() {
             <div
               class="h-32 w-32 selection:avatar mt-10 md:mt-20 mb-2 hover:scale-105 shadow-xl rounded-full overflow-hidden hover:shadow-2xl duration-700 inline-block"
             >
-              <img src="./assets/img/avatar.jpg" class="w-full h-full" alt=""/>
+              <img src="./assets/img/avatar.jpg" class="w-full h-full" alt="">
             </div>
             <div class="name text-4xl font-bold my-4 animate__animated animate__rubberBand">小紫才没有摸鱼</div>
             <div class="text-xl animate__animated animate__rubberBand">
@@ -112,7 +112,7 @@ function scrollWatch() {
                     href="https://space.bilibili.com/237140787"
                     title="小紫的哔哩哔哩主页"
                   >
-                    <img src="./assets/icon/bilibili.ico" :width="24" :height="24" alt="哔哩哔哩" />
+                    <img src="./assets/icon/bilibili.ico" :width="24" :height="24" alt="哔哩哔哩">
                   </a>
                   <a
                     class="cursor-pointer"
@@ -120,7 +120,7 @@ function scrollWatch() {
                     href="https://www.douyin.com/user/MS4wLjABAAAA3dM0RZ_5Zza3z2FgUdjSxvy-VQf58-JyMChyJ1P6va0lysRHZoQ2SXPRCee3Atl-"
                     title="小紫的抖音主页"
                   >
-                    <img src="./assets/icon/tiktok.png" :width="24" :height="24" alt="抖音" />
+                    <img src="./assets/icon/tiktok.png" :width="24" :height="24" alt="抖音">
                   </a>
                   <a
                     class="cursor-pointer"
@@ -128,7 +128,7 @@ function scrollWatch() {
                     href="https://www.xiaohongshu.com/user/profile/6287f0a60000000021020004"
                     title="小紫的小红书主页"
                   >
-                    <img src="./assets/icon/xiaohongshu.ico" :width="24" :height="24" alt="小红书" />
+                    <img src="./assets/icon/xiaohongshu.ico" :width="24" :height="24" alt="小红书">
                   </a>
                   <a
                     class="cursor-pointer"
@@ -136,7 +136,7 @@ function scrollWatch() {
                     href="https://qm.qq.com/cgi-bin/qm/qr?k=PHl4yTgj3dJ2RbY0hrJfMo21j9j97YmX&group_code=505200250"
                     title="小紫的直播通知群"
                   >
-                    <img src="./assets/icon/qq.png" :width="24" :height="24" alt="QQ群" />
+                    <img src="./assets/icon/qq.png" :width="24" :height="24" alt="QQ群">
                   </a>
                   <a
                     class="cursor-pointer"
@@ -144,7 +144,7 @@ function scrollWatch() {
                     href="https://pd.qq.com/g/03koe835z9"
                     title="小紫的腾讯频道"
                   >
-                    <img src="./assets/icon/qq_guild.ico" width="24" height="24" alt="腾讯频道" />
+                    <img src="./assets/icon/qq_guild.ico" width="24" height="24" alt="腾讯频道">
                   </a>
                 </div>
               </div>
@@ -180,7 +180,7 @@ function scrollWatch() {
           @input="inputSearch(searchContent)"
           v-model="searchContent"
           class="md:col-span-3 rounded-2xl w-full mb-3 md:mb-0 h-10 px-4 text-black"
-        />
+        >
         <div
           @click="randomCopy()"
           class="md:col-span-1 h-10 w-full duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg rounded-2xl leading-10"
