@@ -21,21 +21,25 @@ function copySongName(song: string) {
     timeout: 3000,
   })
 }
+
 function randomCopy() {
   let rand = Math.floor(Math.random() * (songList.value.length - 1))
   copySongName(songList.value[rand].song)
 }
+
 function switchLang(lang: string) {
   showSongList.value = songList.value
   if (lang !== '') {
     showSongList.value = showSongList.value.filter(
-      (item: { lang: string }) => item.lang === lang
+      (item: { lang: string }) => item.lang === lang,
     )
   }
   searchContent.value = null
   nowLang.value = lang
 }
+
 const timeout = ref()
+
 function inputSearch(content: string) {
   clearTimeout(timeout.value)
   timeout.value = setTimeout(() => {
@@ -59,18 +63,21 @@ function inputSearch(content: string) {
           flag = item.remark.includes(content)
         }
         return flag
-      }
+      },
     )
   }, 300)
 }
+
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
+
 onMounted(() => {
   window.addEventListener('scroll', scrollWatch, true)
 })
 
 const scroll = ref(0)
+
 function scrollWatch() {
   scroll.value = document.documentElement.scrollTop || document.body.scrollTop
 }
@@ -167,11 +174,13 @@ function scrollWatch() {
           @click="switchLang(lang)"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
           :class="nowLang === lang ? 'border border-fuchsia-500' : ''"
-        >{{ lang }}</div>
+        >{{ lang }}
+        </div>
         <div
           @click="switchLang('')"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
-        >重置</div>
+        >重置
+        </div>
       </div>
       <div class="mb-6 grid md:grid-cols-4 md:gap-4 px-4 md:px-6">
         <input
@@ -184,7 +193,8 @@ function scrollWatch() {
         <div
           @click="randomCopy()"
           class="md:col-span-1 h-10 w-full duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg rounded-2xl leading-10"
-        >随便听听</div>
+        >随便听听
+        </div>
       </div>
       <div class="mb-2 text-gray-500">
         <i class="fa-regular fa-copy mr-1"></i>轻点歌名可以复制哦~
@@ -192,20 +202,20 @@ function scrollWatch() {
       <div class="p-2">
         <table class="w-full mb-6 hover:shadow-lg duration-700">
           <thead class="w-full border-b-2 border-fuchsia-800">
-            <tr>
-              <th class="w-2/6">歌名</th>
-              <th class="w-2/6">歌手</th>
-              <th class="hidden md:table-cell w-1/6">语言</th>
-              <th class="hidden md:table-cell">备注</th>
-            </tr>
+          <tr>
+            <th class="w-2/6">歌名</th>
+            <th class="w-2/6">歌手</th>
+            <th class="hidden md:table-cell w-1/6">语言</th>
+            <th class="hidden md:table-cell">备注</th>
+          </tr>
           </thead>
           <tbody>
-            <tr @click="copySongName(item.song)" v-for="(item, index) in showSongList" :key="index">
-              <th>{{ item.song }}</th>
-              <th>{{ item.artist }}</th>
-              <th class="hidden md:table-cell">{{ item.lang }}</th>
-              <th class="hidden md:table-cell">{{ item.remark }}</th>
-            </tr>
+          <tr @click="copySongName(item.song)" v-for="(item, index) in showSongList" :key="index">
+            <th>{{ item.song }}</th>
+            <th>{{ item.artist }}</th>
+            <th class="hidden md:table-cell">{{ item.lang }}</th>
+            <th class="hidden md:table-cell">{{ item.remark }}</th>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -264,12 +274,15 @@ function scrollWatch() {
   background-color: #edd1d8;
   background-image: linear-gradient(0deg, #edd1d8d0, #edd1d8d0), url('./assets/img/bg.jpg');
 }
+
 .title-box {
   transition: transform 1s ease-out;
+
   .name {
     font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'PingFang SC', 'Microsoft Yahei', 'MicroSoft YaHei UI', system-ui, serif;
   }
 }
+
 .intro-box {
   position: relative;
   //left: 40%;
@@ -277,44 +290,55 @@ function scrollWatch() {
   //width: 60%;
   opacity: 0;
   transition: opacity 1s;
+
   .intro-box-inner {
     background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
   }
 }
+
 .title:hover {
   .title-box {
     transform: none;
   }
 }
+
 .external-link {
   a {
     margin-left: 0.5rem;
   }
 }
+
 .lang-selector {
   background-color: rgba(255, 255, 255, 0.25);
 }
+
 table {
   background: rgba(255, 255, 255, 0.352);
+
   thead th {
     font-weight: 600;
   }
+
   tbody th {
     font-weight: 400;
   }
 }
+
 tr {
   height: 2.5rem;
 }
+
 tr:hover {
   background: rgba(255, 255, 255, 0.884);
   transition: all 300ms;
 }
+
 tr:active {
   background: rgba(255, 115, 115, 0.884);
   transition: all 50ms;
 }
+
 @media (min-width: 768px) {
   .bg {
     background-position: top center;
@@ -329,11 +353,13 @@ tr:active {
     .title-box {
       transform: translateX(-30%);
     }
+
     .intro-box {
       opacity: 1;
     }
   }
 }
+
 @media (min-width: 1024px) {
   .intro-box {
     left: 40%;
@@ -346,6 +372,7 @@ tr:active {
     }
   }
 }
+
 @media (min-width: 1280px) {
   .intro-box {
     left: 40%;
