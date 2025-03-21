@@ -12,6 +12,8 @@ const songList = ref(SongList)
 const showSongList = ref()
 showSongList.value = songList.value
 
+const langSet = new Set(SongList.map((item) => item.lang))
+
 function copySongName(song: string) {
   navigator.clipboard.writeText('点歌 ' + song)
 
@@ -26,9 +28,6 @@ function randomCopy() {
 function switchLang(lang: string) {
   showSongList.value = songList.value
   if (lang !== '') {
-    toast.success('试试“' + lang + '” 歌吧！', {
-      timeout: 1200,
-    })
     showSongList.value = showSongList.value.filter(
       (item: { lang: string }) => item.lang === lang
     )
@@ -90,24 +89,6 @@ function scrollWatch() {
   </div>
   <div class="w-full h-full bg text-center justify-center flex">
     <div class="xl:w-1280 md:w-5/6 w-11/12">
-      <div
-        class="my-6 mx-auto rounded-2xl border-red-800 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-4 gap-3 p-4 md:p-6 duration-500"
-      >
-        <div
-          @click="switchLang('国语')"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
-          :class="nowLang == '国语' ? 'border border-red-600' : ''"
-        >国语</div>
-        <div
-          @click="switchLang('粤语')"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
-          :class="nowLang == '粤语' ? 'border border-red-600' : ''"
-        >粤语</div>
-        <div
-          @click="switchLang('日语')"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
-          :class="nowLang == '日语' ? 'border border-red-600' : ''"
-        >日语</div>
       <div class="row-auto flex flex-wrap">
         <div class="title w-full">
           <div class="title-box w-full">
@@ -180,19 +161,16 @@ function scrollWatch() {
         </div>
       </div>
 
+      <div
+        class="lang-selector my-6 mx-auto rounded-2xl border-fuchsia-700 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-4 gap-3 p-4 md:p-6 duration-500"
+      >
         <div
-          @click="switchLang('英语')"
+          v-for="(lang, index) in langSet"
+          :key="index"
+          @click="switchLang(lang)"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
-          :class="nowLang == '英语' ? 'border border-red-600' : ''"
-        >英语</div>
-        <div
-          @click="openURL('https://www.itsuki.club')"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
-        >小树の主页</div>
-        <div
-          @click="openURL('https://button.itsuki.club/')"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
-        >小树の按钮</div>
+          :class="nowLang === lang ? 'border border-fuchsia-500' : ''"
+        >{{ lang }}</div>
         <div
           @click="switchLang('')"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
@@ -329,6 +307,9 @@ function scrollWatch() {
   a {
     margin-left: 0.5rem;
   }
+}
+.lang-selector {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 table {
   background: rgba(255, 255, 255, 0.352);
