@@ -44,7 +44,7 @@ function inputSearch(content: string) {
     showSongList.value = showSongList.value.filter(
       (item: {
         song: string
-        singer: string
+        artist: string
         remark: string
         style: string
       }) => {
@@ -52,14 +52,11 @@ function inputSearch(content: string) {
         if (item.song !== '' && item.song !== null) {
           flag = item.song.includes(content)
         }
-        if (item.singer !== '' && item.singer !== null && !flag) {
-          flag = item.singer.includes(content)
+        if (item.artist !== '' && item.artist !== null && !flag) {
+          flag = item.artist.includes(content)
         }
         if (item.remark !== '' && item.remark !== null && !flag) {
           flag = item.remark.includes(content)
-        }
-        if (item.style !== '' && item.style !== null && !flag) {
-          flag = item.style.includes(content)
         }
         return flag
       }
@@ -187,47 +184,26 @@ function scrollWatch() {
         <div
           @click="randomCopy()"
           class="md:col-span-1 h-10 w-full duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg rounded-2xl leading-10"
-        >随机选取</div>
+        >随便听听</div>
       </div>
       <div class="mb-2 text-gray-500">
         <i class="fa-regular fa-paper-plane mr-2"></i>轻点歌名可以复制喔~
       </div>
       <div class="p-2">
         <table class="w-full mb-6 hover:shadow-lg duration-700">
-          <thead class="w-full border-b-2 border-red-900">
+          <thead class="w-full border-b-2 border-fuchsia-800">
             <tr>
-              <th class="w-28 hidden md:table-cell">
-                <i class="fa-solid fa-feather"></i>
-              </th>
-              <th class="w-1/2">歌名</th>
-              <th class="w-28">歌手</th>
-              <th class="hidden md:table-cell w-28">语言</th>
-              <th class="hidden md:table-cell w-28">风格</th>
+              <th class="w-2/6">歌名</th>
+              <th class="w-2/6">歌手</th>
+              <th class="hidden md:table-cell w-1/6">语言</th>
               <th class="hidden md:table-cell">备注</th>
             </tr>
           </thead>
           <tbody>
             <tr @click="copySongName(item.song)" v-for="(item, index) in showSongList" :key="index">
-              <th class="hidden md:table-cell w-32 justify-center">
-                <div class="justify-center flex px-3 gap-x-1">
-                  <i
-                    class="fa-solid fa-bookmark text-red-700 w-8 order-last"
-                    v-show="item.isTop == 1"
-                  ></i>
-
-                  <i class="w-8" :class="item.icon" v-if="item.icon !== null"></i>
-                </div>
-              </th>
-              <th>
-                {{ item.song }}
-                <i
-                  class="fa-solid fa-bookmark text-red-700 md:hidden inline-block"
-                  v-show="item.isTop == 1"
-                ></i>
-              </th>
-              <th>{{ item.singer }}</th>
+              <th>{{ item.song }}</th>
+              <th>{{ item.artist }}</th>
               <th class="hidden md:table-cell">{{ item.lang }}</th>
-              <th class="hidden md:table-cell">{{ item.style }}</th>
               <th class="hidden md:table-cell">{{ item.remark }}</th>
             </tr>
           </tbody>
@@ -274,9 +250,6 @@ function scrollWatch() {
   background-attachment: fixed;
   background-size: 100vh;
   z-index: -1;
-  background-color: #ffe5d9;
-  background-image: linear-gradient(0deg, #ffe5d9d0, #ffe5d9d0),
-    url('https://tva1.sinaimg.cn/large/005I8CXily1h5vwvzzs9hj33uw3uwkjm.jpg');
   background-color: #edd1d8;
   background-image: linear-gradient(0deg, #edd1d8d0, #edd1d8d0), url('../assets/img/bg.jpg');
 }
