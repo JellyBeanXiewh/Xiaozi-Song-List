@@ -210,29 +210,40 @@ function scrollWatch() {
         </table>
       </div>
 
-      <div class="text-center text-gray-400 pb-8 mt-24">
-        <div class="text-red-400 animate__animated animate__bounce animate__infinite">
+      <div class="text-center text-gray-400 pb-8 mt-6">
+        <div class="text-purple-400 animate__animated animate__bounce animate__infinite">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <div class="mb-2 text-sm">
-          Presented by
+        <div class="m-2 text-sm">
           <a
-            class="text-yellow-500"
+            class="cursor-pointer hover:border-b border-gray-400"
             target="_blank"
-            href="https://www.cupbread.cn"
-          >树宝和她的家楞们</a>
+            href="https://beian.miit.gov.cn/"
+          >
+            这里放备案号
+          </a>
         </div>
-        <div class="w-1/2 mx-auto">
-          <i class="fa-regular fa-copyright mr-2"></i>
-          <span class="mr-2">2021-2022</span>
-          <span class="mr-2 block lg:inline-block lg:mt-2">星谷樹的歌单</span>
+        <div class="mt-2 text-sm">
+          <span>Presented by </span>
+          <a
+            class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
+            target="_blank"
+            href="https://space.bilibili.com/30573758"
+          >
+            <i class="fa-brands fa-bilibili mr-1"></i>加勒比海没有盗
+          </a>
+        </div>
+        <div class="mx-auto text-sm">
+          <i class="fa-regular fa-copyright mr-2 text-sm"></i>
+          <span class="mr-2">2025</span>
+          <span class="mr-2 inline-block mt-2">小紫的歌单</span>
           <span>
             <a
               href="https://github.com/CupOfBread/Itsuki-Song-List"
               target="_blank"
-              class="text-yellow-500"
+              class="text-yellow-500 cursor-pointer hover:border-b border-yellow-500"
             >
-              <i class="fa-brands fa-github-alt mr-1"></i>Github
+              <i class="fa-brands fa-github mr-1"></i>GitHub
             </a>
           </span>
         </div>
