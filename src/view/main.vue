@@ -239,7 +239,7 @@ function scrollWatch() {
           <span class="mr-2 inline-block mt-2">小紫的歌单</span>
           <span>
             <a
-              href="https://github.com/CupOfBread/Itsuki-Song-List"
+              href="https://github.com/JellyBeanXiewh/Xiaozi-Song-List"
               target="_blank"
               class="text-yellow-500 cursor-pointer hover:border-b border-yellow-500"
             >
