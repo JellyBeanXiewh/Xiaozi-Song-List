@@ -82,12 +82,6 @@ const scroll = ref(0)
 function scrollWatch() {
   scroll.value = document.documentElement.scrollTop || document.body.scrollTop
 }
-function openURL(url: string) {
-  window.open(url, '_blank')
-}
-toast.success('欢迎来到星谷树的歌单！', {
-  timeout: 2000,
-})
 </script>
 
 <template>
@@ -103,15 +97,13 @@ toast.success('欢迎来到星谷树的歌单！', {
       <div
         class="h-32 w-32 selection:avatar mt-10 md:mt-20 mb-2 hover:scale-105 shadow-xl rounded-full overflow-hidden hover:shadow-2xl duration-700 inline-block"
       >
-        <img
-          src="https://tva1.sinaimg.cn/large/005I8CXily1h5vmlf7boyj33uw3uw1kx.jpg"
-          class="w-full h-full"
-        />
+        <img src="../assets/img/avatar.jpg" class="w-full h-full" alt=""/>
       </div>
-      <div class="text-4xl font-semibold my-4 animate__animated animate__rubberBand">星谷樹_ITSUKI</div>
+      <div class="text-4xl font-semibold my-4 animate__animated animate__rubberBand">小紫才没有摸鱼</div>
       <div class="text-xl animate__animated animate__rubberBand">
         和她拿手的
         <span class="font-bold">{{ SongList.length }}</span> 首歌
+        和她唱过的
       </div>
       <div
         class="my-6 mx-auto rounded-2xl border-red-800 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-4 gap-3 p-4 md:p-6 duration-500"
