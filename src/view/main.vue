@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useToast } from 'vue-toastification'
-import request from '../utils/request'
-import { useStore } from '../store'
-import { storeToRefs } from 'pinia'
 import { ref, onMounted } from 'vue'
+import SongList from '../assets/json/song_list.json'
 
 const toast = useToast()
 const nowLang = ref('')
@@ -16,6 +14,10 @@ request({ url: '/song/all/index', method: 'get' }).then((res) => {
   SongList.value = res.data.result
   showSongList.value = SongList.value
 })
+const songList = ref(SongList)
+const showSongList = ref()
+showSongList.value = songList.value
+
 function copySongName(song: string) {
   navigator.clipboard.writeText('点歌 ' + song)
 
@@ -24,11 +26,11 @@ function copySongName(song: string) {
   })
 }
 function randomCopy() {
-  let rand = Math.floor(Math.random() * (SongList.value.length - 1))
-  copySongName(SongList.value[rand].song)
+  let rand = Math.floor(Math.random() * (songList.value.length - 1))
+  copySongName(songList.value[rand].song)
 }
 function switchLang(lang: string) {
-  showSongList.value = SongList.value
+  showSongList.value = songList.value
   if (lang !== '') {
     toast.success('试试“' + lang + '” 歌吧！', {
       timeout: 1200,
@@ -44,7 +46,7 @@ const timeout = ref()
 function inputSearch(content: string) {
   clearTimeout(timeout.value)
   timeout.value = setTimeout(() => {
-    showSongList.value = SongList.value
+    showSongList.value = songList.value
     if (content == '' || content == null) return
     showSongList.value = showSongList.value.filter(
       (item: {
@@ -101,9 +103,8 @@ function scrollWatch() {
       </div>
       <div class="text-4xl font-semibold my-4 animate__animated animate__rubberBand">小紫才没有摸鱼</div>
       <div class="text-xl animate__animated animate__rubberBand">
-        和她拿手的
-        <span class="font-bold">{{ SongList.length }}</span> 首歌
         和她唱过的
+        <span class="font-bold">{{ songList.length }}</span> 首歌
       </div>
       <div
         class="my-6 mx-auto rounded-2xl border-red-800 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-4 gap-3 p-4 md:p-6 duration-500"
