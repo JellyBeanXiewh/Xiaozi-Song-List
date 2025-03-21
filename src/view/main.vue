@@ -297,6 +297,12 @@ function scrollWatch() {
 }
 table {
   background: rgba(255, 255, 255, 0.352);
+  thead th {
+    font-weight: 600;
+  }
+  tbody th {
+    font-weight: 400;
+  }
 }
 tr {
   height: 2.5rem;
