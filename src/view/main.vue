@@ -88,18 +88,8 @@ function scrollWatch() {
   >
     <i class="fa-solid fa-arrow-up text-gray-500"></i>
   </div>
-  <div class="w-full h-full centerbg text-center justify-center flex">
+  <div class="w-full h-full bg text-center justify-center flex">
     <div class="xl:w-1280 md:w-5/6 w-11/12">
-      <div
-        class="h-32 w-32 selection:avatar mt-10 md:mt-20 mb-2 hover:scale-105 shadow-xl rounded-full overflow-hidden hover:shadow-2xl duration-700 inline-block"
-      >
-        <img src="../assets/img/avatar.jpg" class="w-full h-full" alt=""/>
-      </div>
-      <div class="text-4xl font-semibold my-4 animate__animated animate__rubberBand">小紫才没有摸鱼</div>
-      <div class="text-xl animate__animated animate__rubberBand">
-        和她唱过的
-        <span class="font-bold">{{ songList.length }}</span> 首歌
-      </div>
       <div
         class="my-6 mx-auto rounded-2xl border-red-800 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-4 gap-3 p-4 md:p-6 duration-500"
       >
@@ -118,6 +108,78 @@ function scrollWatch() {
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
           :class="nowLang == '日语' ? 'border border-red-600' : ''"
         >日语</div>
+      <div class="row-auto flex flex-wrap">
+        <div class="title w-full">
+          <div class="title-box w-full">
+            <div
+              class="h-32 w-32 selection:avatar mt-10 md:mt-20 mb-2 hover:scale-105 shadow-xl rounded-full overflow-hidden hover:shadow-2xl duration-700 inline-block"
+            >
+              <img src="../assets/img/avatar.jpg" class="w-full h-full" alt=""/>
+            </div>
+            <div class="name text-4xl font-bold my-4 animate__animated animate__rubberBand">小紫才没有摸鱼</div>
+            <div class="text-xl animate__animated animate__rubberBand">
+              和她唱过的
+              <span class="font-normal">{{ songList.length }}</span> 首歌
+            </div>
+          </div>
+          <div class="intro-box text-start md:block hidden">
+            <div class="intro-box-inner p-4 rounded-2xl border-fuchsia-700 border-2">
+              <!--TODO: 使用v-for渲染-->
+              <div class="justify-between flex h-9">
+                <p class="text-xl font-semibold">小紫的自我介绍</p>
+                <div class="flex external-link">
+                  <a
+                    class="cursor-pointer"
+                    target="_blank"
+                    href="https://space.bilibili.com/237140787"
+                    title="小紫的哔哩哔哩主页"
+                  >
+                    <img src="../assets/icon/bilibili.ico" width="24" height="24" alt="哔哩哔哩" />
+                  </a>
+                  <a
+                    class="cursor-pointer"
+                    target="_blank"
+                    href="https://www.douyin.com/user/MS4wLjABAAAA3dM0RZ_5Zza3z2FgUdjSxvy-VQf58-JyMChyJ1P6va0lysRHZoQ2SXPRCee3Atl-"
+                    title="小紫的抖音主页"
+                  >
+                    <img src="../assets/icon/tiktok.png" width="24" height="24" alt="抖音" />
+                  </a>
+                  <a
+                    class="cursor-pointer"
+                    target="_blank"
+                    href="https://www.xiaohongshu.com/user/profile/6287f0a60000000021020004"
+                    title="小紫的小红书主页"
+                  >
+                    <img src="../assets/icon/xiaohongshu.ico" width="24" height="24" alt="小红书" />
+                  </a>
+                  <a
+                    class="cursor-pointer"
+                    target="_blank"
+                    href="https://qm.qq.com/cgi-bin/qm/qr?k=PHl4yTgj3dJ2RbY0hrJfMo21j9j97YmX&group_code=505200250"
+                    title="小紫的直播通知群"
+                  >
+                    <img src="../assets/icon/qq.png" width="24" height="24" alt="QQ群" />
+                  </a>
+                  <a
+                    class="cursor-pointer"
+                    target="_blank"
+                    href="https://pd.qq.com/g/03koe835z9"
+                    title="小紫的腾讯频道"
+                  >
+                    <img src="../assets/icon/qq_guild.ico" width="24" height="24" alt="腾讯频道" />
+                  </a>
+                </div>
+              </div>
+              <p> ▌这里是正在努力的个人势 VTuber 天才美少女机械师！叫我小紫、紫宝都可以~</p>
+              <p> ▌⏰出道日：5.02</p>
+              <p> ▌🎂生日：10.08</p>
+              <p> ▌直播内容一般为游戏 / 杂谈 / 唱歌 / 整活，互动陪伴型直播间，努力让你感受赛博之家的温暖~！</p>
+              <p> ▌MBTI 是超绝小护士 ISFJ，生活中发生的事事都可以来直播间和紫宝说噢，主打积极阳光正能量的陪伴~！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <div
           @click="switchLang('英语')"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
@@ -226,17 +288,47 @@ function scrollWatch() {
 </template>
 
 <style scoped lang="scss">
-.centerbg {
+.bg {
   margin: 0;
   padding: 0;
-  background-position: top center;
+  background-position-x: left;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: 100vh;
   z-index: -1;
   background-color: #ffe5d9;
   background-image: linear-gradient(0deg, #ffe5d9d0, #ffe5d9d0),
     url('https://tva1.sinaimg.cn/large/005I8CXily1h5vwvzzs9hj33uw3uwkjm.jpg');
+  background-color: #edd1d8;
+  background-image: linear-gradient(0deg, #edd1d8d0, #edd1d8d0), url('../assets/img/bg.jpg');
+}
+.title-box {
+  transition: transform 1s ease-out;
+  .name {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'PingFang SC', 'Microsoft Yahei', 'MicroSoft YaHei UI', system-ui, serif;
+  }
+}
+.intro-box {
+  position: relative;
+  //left: 40%;
+  top: -90%;
+  //width: 60%;
+  opacity: 0;
+  transition: opacity 1s;
+  .intro-box-inner {
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+  }
+}
+.title:hover {
+  .title-box {
+    transform: none;
+  }
+}
+.external-link {
+  a {
+    margin-left: 0.5rem;
+  }
 }
 table {
   background: rgba(255, 255, 255, 0.352);
@@ -252,12 +344,47 @@ tr:active {
   background: rgba(255, 115, 115, 0.884);
   transition: all 50ms;
 }
-@media (max-width: 768px) {
-  .centerbg {
-    background-size: 100vh;
-    background-attachment: local;
-    background-image: linear-gradient(0deg, #ffe5d9e5, #ffe5d9e5),
-      url('https://tva1.sinaimg.cn/large/005I8CXily1h5vwvzzs9hj33uw3uwkjm.jpg');
+@media (min-width: 768px) {
+  .bg {
+    background-position: top center;
+    background-size: cover;
+  }
+  .intro-box {
+    left: 42%;
+    top: -90%;
+    width: 58%;
+  }
+  .title:hover {
+    .title-box {
+      transform: translateX(-30%);
+    }
+    .intro-box {
+      opacity: 1;
+    }
+  }
+}
+@media (min-width: 1024px) {
+  .intro-box {
+    left: 40%;
+    top: -82%;
+    width: 60%;
+  }
+  .title:hover {
+    .title-box {
+      transform: translateX(-30%);
+    }
+  }
+}
+@media (min-width: 1280px) {
+  .intro-box {
+    left: 40%;
+    top: -75%;
+    width: 50%;
+  }
+  .title:hover {
+    .title-box {
+      transform: translateX(-25%);
+    }
   }
 }
 </style>
