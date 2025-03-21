@@ -15,9 +15,9 @@ showSongList.value = songList.value
 const langSet = new Set(SongList.map((item) => item.lang))
 
 function copySongName(song: string) {
-  navigator.clipboard.writeText('点歌 ' + song)
+  navigator.clipboard.writeText(`点歌  ${song}`)
 
-  toast.success('“' + song + '” 复制成功！', {
+  toast.success(`“${song}”已复制到剪贴板`, {
     timeout: 3000,
   })
 }
@@ -187,7 +187,7 @@ function scrollWatch() {
         >随便听听</div>
       </div>
       <div class="mb-2 text-gray-500">
-        <i class="fa-regular fa-paper-plane mr-2"></i>轻点歌名可以复制喔~
+        <i class="fa-regular fa-copy mr-1"></i>轻点歌名可以复制哦~
       </div>
       <div class="p-2">
         <table class="w-full mb-6 hover:shadow-lg duration-700">
