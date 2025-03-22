@@ -29,7 +29,7 @@ body {
   width: 100%;
 }
 body {
-  font-family:'Noto Sans SC', 'PingFang SC', 'Microsoft Yahei', 'MicroSoft YaHei UI', system-ui, serif;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft Yahei', 'MicroSoft YaHei UI', system-ui, serif;
   cursor: url(https://cdn.jsdelivr.net/gh/xiabo2/vieu@master/S1.cur), default;
   background-color: #edd1d8;
 }
