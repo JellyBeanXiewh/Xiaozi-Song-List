@@ -25,9 +25,11 @@ body {
   width: 100%;
   height: 100%;
 }
+
 #app {
   width: 100%;
 }
+
 body {
   font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft Yahei', 'MicroSoft YaHei UI', system-ui, serif;
   cursor: url(https://cdn.jsdelivr.net/gh/xiabo2/vieu@master/S1.cur), default;
@@ -37,6 +39,7 @@ body {
 div::-webkit-scrollbar {
   width: 0;
 }
+
 /* 滚动条样式 */
 ::-webkit-scrollbar {
   width: 12px;
