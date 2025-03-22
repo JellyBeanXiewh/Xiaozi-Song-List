@@ -1,19 +1,23 @@
+import { fileURLToPath, URL } from 'node:url'
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import externalGlobals from 'rollup-plugin-external-globals'
 
 export default defineConfig({
   plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    },
+  },
   build: {
     rollupOptions: {
-      external: ['vue', 'axios', 'vue-router', 'vue-demi', 'pinia'],
+      external: ['vue', 'vue-demi'],
       plugins: [
         externalGlobals({
           vue: 'Vue',
-          'vue-router': 'VueRouter',
-          axios: 'axios',
           'vue-demi': 'VueDemi',
-          pinia: 'Pinia',
         }),
       ],
     },
