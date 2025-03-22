@@ -188,7 +188,7 @@ function scrollWatch() {
           placeholder="搜索"
           @input="inputSearch(searchContent)"
           v-model="searchContent"
-          class="md:col-span-3 rounded-2xl w-full mb-3 md:mb-0 h-10 px-4 text-black"
+          class="bg-white md:col-span-3 rounded-2xl w-full mb-3 md:mb-0 h-10 px-4 text-black"
         >
         <div
           @click="randomCopy()"
