@@ -2,6 +2,7 @@
 import { useToast } from 'vue-toastification'
 import { ref, onMounted } from 'vue'
 import SongList from './assets/json/song_list.json'
+import { useTitle } from '@/utils/useTitle'
 
 const toast = useToast()
 const nowLang = ref('')
@@ -13,6 +14,23 @@ const showSongList = ref()
 showSongList.value = songList.value
 
 const langSet = new Set(SongList.map((item: { lang: string }) => item.lang))
+
+const originTitle = document.title
+const title = ref(originTitle)
+useTitle(title)
+
+// 离开页面 10 秒后修改标题
+let titleTimer: NodeJS.Timeout | undefined
+function handleVisibilityChange() {
+  if (document.visibilityState === 'visible') {
+    clearTimeout(titleTimer)
+    title.value = originTitle
+  } else {
+     titleTimer = setTimeout(() => {
+      title.value = '别肘好吗；；'
+    }, 10000)
+  }
+}
 
 function copySongName(song: string) {
   navigator.clipboard.writeText(`点歌  ${song}`)
@@ -74,6 +92,7 @@ function scrollToTop() {
 
 onMounted(() => {
   window.addEventListener('scroll', scrollWatch, true)
+  window.addEventListener('visibilitychange', handleVisibilityChange)
 })
 
 const scroll = ref(0)
