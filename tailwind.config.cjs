@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       cursor: {
-        pointer:
-          'url(https://cdn.jsdelivr.net/gh/xiabo2/vieu@master/S2.cur),pointer',
+        pointer: 'url(@/assets/cursor/link.png), pointer',
+        text: 'url(@/assets/cursor/text.png), text',
       },
       width: {
         1280: '80rem',
