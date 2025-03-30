@@ -87,7 +87,7 @@ function scrollWatch() {
   <div
     v-show="scroll > 150"
     @click="scrollToTop"
-    class="fixed bottom-12 right-4 lg:right-16 lg:bottom-14 w-10 h-10 leading-10 rounded-lg bg-white shadow-lg hover:shadow-xl text-center duration-200 z-50 hover:cursor-pointer"
+    class="fixed bottom-12 right-4 lg:right-16 lg:bottom-14 w-10 h-10 leading-10 rounded-lg bg-white opacity-80 shadow-lg hover:shadow-xl text-center duration-200 z-50 hover:cursor-pointer"
   >
     <i class="fa-solid fa-arrow-up text-gray-500"></i>
   </div>
@@ -151,7 +151,7 @@ function scrollWatch() {
                     href="https://pd.qq.com/g/03koe835z9"
                     title="小紫的腾讯频道"
                   >
-                    <img src="@/assets/icon/qq_guild.ico" width="24" height="24" alt="腾讯频道">
+                    <img src="@/assets/icon/qq_guild.ico" :width="24" :height="24" alt="腾讯频道">
                   </a>
                 </div>
               </div>
@@ -330,12 +330,12 @@ tr {
 }
 
 tr:hover {
-  background: rgba(255, 255, 255, 0.884);
+  background: rgba(255, 255, 255, 0.7);
   transition: all 300ms;
 }
 
 tr:active {
-  background: rgba(255, 115, 115, 0.884);
+  background: rgba(255, 255, 255, 0.9);
   transition: all 50ms;
 }
 
