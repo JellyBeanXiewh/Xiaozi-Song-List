@@ -233,29 +233,43 @@ function scrollWatch() {
             这里放备案号
           </a>
         </div>
+        <div class="m-2 text-sm">
+          Copyright © 2025 小紫的歌单 All Rights Reserved.
+        </div>
+        <div class="m-2 text-sm">
+          <span>本站所用小紫形象素材版权均属于</span>
+          <span class="block lg:inline-block">
+            <a
+              class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
+              target="_blank"
+              href="https://space.bilibili.com/237140787"
+            >
+              <i class="fa-brands fa-bilibili ml-1 mr-1"></i>
+              <span>小紫才没有摸鱼</span>
+            </a>，已获使用授权
+          </span>
+        </div>
+        <div class="m-2 text-sm">
+          <span>Open source with GPL-3.0 License</span>
+          <a
+            href="https://github.com/JellyBeanXiewh/Xiaozi-Song-List"
+            target="_blank"
+            class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
+          >
+            <i class="fa-brands fa-github ml-1 mr-1"></i>
+            <span>GitHub</span>
+          </a>
+        </div>
         <div class="mt-2 text-sm">
-          <span>Presented by </span>
+          <span>Presented and maintained by </span>
           <a
             class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
             target="_blank"
             href="https://space.bilibili.com/30573758"
           >
-            <i class="fa-brands fa-bilibili mr-1"></i>加勒比海没有盗
+            <i class="fa-brands fa-bilibili mr-1"></i>
+            <span>加勒比海没有盗</span>
           </a>
-        </div>
-        <div class="mx-auto text-sm">
-          <i class="fa-regular fa-copyright mr-2 text-sm"></i>
-          <span class="mr-2">2025</span>
-          <span class="mr-2 inline-block mt-2">小紫的歌单</span>
-          <span>
-            <a
-              href="https://github.com/JellyBeanXiewh/Xiaozi-Song-List"
-              target="_blank"
-              class="text-yellow-500 cursor-pointer hover:border-b border-yellow-500"
-            >
-              <i class="fa-brands fa-github mr-1"></i>GitHub
-            </a>
-          </span>
         </div>
       </div>
     </div>
