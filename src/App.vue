@@ -21,12 +21,13 @@ useTitle(title)
 
 // 离开页面 10 秒后修改标题
 let titleTimer: NodeJS.Timeout | undefined
+
 function handleVisibilityChange() {
   if (document.visibilityState === 'visible') {
     clearTimeout(titleTimer)
     title.value = originTitle
   } else {
-     titleTimer = setTimeout(() => {
+    titleTimer = setTimeout(() => {
       title.value = '别肘好吗；；'
     }, 10000)
   }
@@ -257,7 +258,7 @@ function scrollWatch() {
         </div>
         <div class="m-2 text-sm">
           <span>本站所用小紫形象素材版权均属于</span>
-          <span class="block lg:inline-block">
+          <span class="inline-block">
             <a
               class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
               target="_blank"
@@ -265,30 +266,35 @@ function scrollWatch() {
             >
               <i class="fa-brands fa-bilibili ml-1 mr-1"></i>
               <span>小紫才没有摸鱼</span>
-            </a>，已获使用授权
+            </a>，
           </span>
+          <span>已获使用授权</span>
         </div>
         <div class="m-2 text-sm">
-          <span>Open source with GPL-3.0 License</span>
-          <a
-            href="https://github.com/JellyBeanXiewh/Xiaozi-Song-List"
-            target="_blank"
-            class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
-          >
+          <span>Open source under the GPLv3 License</span>
+          <span class="inline-block">
+            <a
+              href="https://github.com/JellyBeanXiewh/Xiaozi-Song-List"
+              target="_blank"
+              class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
+            >
             <i class="fa-brands fa-github ml-1 mr-1"></i>
             <span>GitHub</span>
           </a>
+          </span>
         </div>
         <div class="mt-2 text-sm">
-          <span>Presented and maintained by </span>
-          <a
-            class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
-            target="_blank"
-            href="https://space.bilibili.com/30573758"
-          >
+          <span>Developed, presented and maintained by </span>
+          <span class="inline-block">
+            <a
+              class="cursor-pointer text-yellow-500 hover:border-b border-yellow-500"
+              target="_blank"
+              href="https://space.bilibili.com/30573758"
+            >
             <i class="fa-brands fa-bilibili mr-1"></i>
             <span>加勒比海没有盗</span>
           </a>
+          </span>
         </div>
       </div>
     </div>
