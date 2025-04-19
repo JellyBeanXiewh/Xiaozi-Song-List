@@ -18,13 +18,13 @@ Vue3 + Typescript + Vite
 
 按格式填写 [song_list.example.json](./src/assets/json/song_list.example.json)，并重命名为 `song_list.json`
 
-或者填写 [song_list.example.csv](./scripts/song_list.example.csv)，以 `UTF-8 BOM` 编码保存并重命名为 `song_list.csv`，运行 ```python3 scripts/convert_csv_to_json.py```
+或者填写 [song_list.example.xlsx](./scripts/song_list.example.xlsx)，并重命名为 `song_list.xlsx`，运行 ```npm convert```
 
 ### 开发
 
 ```shell
-yarn install
-yarn dev
+npm install
+npm dev
 ```
 
 ## 在线浏览
@@ -40,6 +40,8 @@ https://zisong.plustech.plus
 [Itsuki-Song-List](https://github.com/CupOfBread/Itsuki-Song-List)
 
 [song-list-of-nanakaie](https://github.com/alan314m/song-list-of-nanakaie)
+
+[sui-song-list](https://github.com/starsJuly/sui-song-list)
 
 ## 授权信息
 

@@ -1,0 +1,101 @@
+import assert from 'assert'
+import path from 'path'
+import fs from 'fs'
+import ExcelJS from 'exceljs'
+
+const src = path.resolve('scripts/song_list.xlsx')
+const dest = path.resolve('src/assets/json/song_list.json')
+
+const loadSongList = async ({src, dest}) => {
+  const mapTitleName = {
+    '歌名': 'song',
+    '歌手': 'artist',
+    '语言': 'lang',
+    '备注': 'remark',
+  }
+
+  const buffer = fs.readFileSync(src)
+
+  const workbook = new ExcelJS.Workbook()
+  workbook.calcProperties.fullCalcOnLoad = true
+  await workbook.xlsx.load(buffer)
+
+  let songList = []
+  if (workbook.worksheets.length > 0) {
+    const ws0 = workbook.worksheets[0]
+
+    const findHeader = (worksheet) => {
+      for (let i = 1; i <= worksheet.rowCount; ++i) {
+        const row = worksheet.getRow(i)
+        if (row.actualCellCount > 0) { return row }
+      }
+      return undefined
+    }
+
+    const makeRowGroupParser = (header) => {
+      let rowParsers = {}
+
+      if (header) {
+        header.eachCell((cell, idx) => {
+          const uniqueId = mapTitleName[cell.text]
+          if (uniqueId) {
+            rowParsers[uniqueId] = {
+              src: {
+                row: 1, col: idx, name: cell.text
+              }, parse(d) {
+                return d.getCell(this.src.col).text || '';
+              }
+            }
+          }
+        })
+
+        rowParsers.song && (
+          rowParsers.song = Object.setPrototypeOf({
+            parse(d) {
+              const nm = super.parse(d)
+              return (console.log(nm), assert(nm, 'song not found'), nm)
+            },
+          }, rowParsers.song)
+        )
+      }
+
+      return {
+        rowParsers: rowParsers,
+        parse(r) {
+          let d = {}
+          Object.entries(this.rowParsers).forEach(([k0, p0]) => {
+            d[k0] = p0.parse(r)
+          })
+          return d
+        },
+      }
+    }
+
+    const rowFilter = (group, r, idx) => {
+      // Skip empty rows
+      if(r.actualCellCount <= 0) { return false }
+      if (group.rowParsers.song) {
+        const songNameParser = group.rowParsers.song
+        const song = r.getCell(songNameParser.src.col).text
+        // Skip empty name rows
+        if (!song) { return false }
+        // Skip the head row of the table
+        else if (song === songNameParser.src.name) { return false }
+      }
+
+      return true
+    }
+
+    const rowGroupParser = makeRowGroupParser(findHeader(ws0))
+    ws0.eachRow((r, i) => {
+      if (!rowFilter(rowGroupParser, r, i)) { return }
+      const songData = rowGroupParser.parse(r)
+      songList.push(songData)
+    })
+  }
+
+  fs.writeFileSync(dest, JSON.stringify(songList))
+  console.log('生成歌单完成')
+}
+
+loadSongList({src, dest})
