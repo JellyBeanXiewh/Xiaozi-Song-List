@@ -4,9 +4,9 @@ import fs from 'fs'
 import ExcelJS from 'exceljs'
 
 const src = path.resolve('scripts/song_list.xlsx')
-const dest = path.resolve('src/assets/json/song_list.json')
+const dst = path.resolve('src/assets/json/song_list.json')
 
-const loadSongList = async ({src, dest}) => {
+const loadSongList = async (src, dst) => {
   const mapTitleName = {
     '歌名': 'song',
     '歌手': 'artist',
@@ -14,11 +14,9 @@ const loadSongList = async ({src, dest}) => {
     '备注': 'remark',
   }
 
-  const buffer = fs.readFileSync(src)
-
   const workbook = new ExcelJS.Workbook()
   workbook.calcProperties.fullCalcOnLoad = true
-  await workbook.xlsx.load(buffer)
+  await workbook.xlsx.readFile(src)
 
   let songList = []
   if (workbook.worksheets.length > 0) {
@@ -41,22 +39,20 @@ const loadSongList = async ({src, dest}) => {
           if (uniqueId) {
             rowParsers[uniqueId] = {
               src: {
-                row: 1, col: idx, name: cell.text
+                row: 1, col: idx, name: cell.text,
               }, parse(d) {
-                return d.getCell(this.src.col).text || '';
-              }
+                return d.getCell(this.src.col).text || ''
+              },
             }
           }
         })
 
-        rowParsers.song && (
-          rowParsers.song = Object.setPrototypeOf({
+        rowParsers.song && (rowParsers.song = Object.setPrototypeOf({
             parse(d) {
               const nm = super.parse(d)
               return (console.log(nm), assert(nm, 'song not found'), nm)
             },
-          }, rowParsers.song)
-        )
+          }, rowParsers.song))
       }
 
       return {
@@ -94,8 +90,8 @@ const loadSongList = async ({src, dest}) => {
     })
   }
 
-  fs.writeFileSync(dest, JSON.stringify(songList))
+  fs.writeFileSync(dst, JSON.stringify(songList))
   console.log('生成歌单完成')
 }
 
-loadSongList({src, dest})
+loadSongList(src, dst)
