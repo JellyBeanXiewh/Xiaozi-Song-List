@@ -69,17 +69,17 @@ function inputSearch(content: string) {
         song: string
         artist: string
         remark: string
-        style: string
       }) => {
+        const lowerCastContent = content.toLowerCase()
         let flag = false
         if (item.song !== '' && item.song !== null) {
-          flag = item.song.includes(content)
+          flag = item.song.toLowerCase().includes(lowerCastContent)
         }
         if (item.artist !== '' && item.artist !== null && !flag) {
-          flag = item.artist.includes(content)
+          flag = item.artist.toLowerCase().includes(lowerCastContent)
         }
         if (item.remark !== '' && item.remark !== null && !flag) {
-          flag = item.remark.includes(content)
+          flag = item.remark.toLowerCase().includes(lowerCastContent)
         }
         return flag
       },
