@@ -13,11 +13,10 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['vue', 'vue-demi'],
+      external: ['vue'],
       plugins: [
         externalGlobals({
           vue: 'Vue',
-          'vue-demi': 'VueDemi',
         }),
       ],
     },
