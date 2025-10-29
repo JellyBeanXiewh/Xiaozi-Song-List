@@ -311,7 +311,7 @@ function scrollWatch() {
   background-size: 100vh;
   z-index: -1;
   background-color: #edd1d8;
-  background-image: linear-gradient(0deg, #edd1d8d0, #edd1d8d0), url('@/assets/img/bg.jpg');
+  background-image: linear-gradient(0deg, #edd1d8d0, #edd1d8d0), url('@/assets/img/bg.webp');
 }
 
 .title-box {
