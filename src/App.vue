@@ -2,7 +2,10 @@
 import { useToast } from 'vue-toastification'
 import { ref, onMounted } from 'vue'
 import SongList from './assets/json/song_list.json'
+import BirthdaySongList from './assets/json/birthday_song_list.json'
 import { useTitle } from '@/utils/useTitle'
+
+const isBirthday = ref(false)
 
 const toast = useToast()
 const nowLang = ref('')
@@ -10,6 +13,7 @@ const searchContent = ref()
 const clientWidth = ref(document.documentElement.clientWidth)
 
 const songList = ref(SongList)
+const birthdaySongList = ref(BirthdaySongList)
 const showSongList = ref()
 showSongList.value = songList.value
 
@@ -47,6 +51,7 @@ function randomCopy() {
 }
 
 function switchLang(lang: string) {
+  isBirthday.value = false
   showSongList.value = songList.value
   if (lang !== '') {
     showSongList.value = showSongList.value.filter(
@@ -57,12 +62,19 @@ function switchLang(lang: string) {
   nowLang.value = lang
 }
 
+function switchBirthdayList() {
+  isBirthday.value = true
+  showSongList.value = birthdaySongList.value
+  searchContent.value = null
+  nowLang.value = ''
+}
+
 const timeout = ref()
 
 function inputSearch(content: string) {
   clearTimeout(timeout.value)
   timeout.value = setTimeout(() => {
-    showSongList.value = songList.value
+    showSongList.value = isBirthday.value ? birthdaySongList.value : songList.value
     if (content == '' || content == null) return
     showSongList.value = showSongList.value.filter(
       (item: {
@@ -122,9 +134,13 @@ function scrollWatch() {
               <img src="@/assets/img/avatar.jpg" class="w-full h-full" alt="">
             </div>
             <div class="name text-4xl font-bold my-4 animate__animated animate__rubberBand">小紫才没有摸鱼</div>
-            <div class="text-xl animate__animated animate__rubberBand">
+            <div v-show="!isBirthday" class="text-xl animate__animated animate__rubberBand">
               和她唱过的
               <span class="font-normal">{{ songList.length }}</span> 首歌
+            </div>
+            <div v-show="isBirthday" class="text-xl animate__animated animate__rubberBand">
+              和生日会唱过的
+              <span class="font-normal">{{ birthdaySongList.length }}</span> 首歌
             </div>
           </div>
           <div class="intro-box text-start md:block hidden">
@@ -197,6 +213,12 @@ function scrollWatch() {
         >{{ lang }}
         </div>
         <div
+          @click="switchBirthdayList()"
+          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
+          :class="isBirthday ? 'border border-fuchsia-500' : ''"
+        >生日会歌单
+        </div>
+        <div
           @click="switchLang('')"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
         >重置
@@ -223,18 +245,29 @@ function scrollWatch() {
         <table class="w-full mb-6 hover:shadow-lg duration-700">
           <thead class="w-full border-b-2 border-fuchsia-800">
           <tr>
-            <th class="w-2/6">歌名</th>
-            <th class="w-2/6">歌手</th>
+            <th class="md:w-2/6" :class="isBirthday ? 'w-3/6': 'w-2/6'">歌名</th>
+            <th class="w-2/6 md:w-2/6">{{ isBirthday ? "原唱" : "歌手" }}</th>
             <th class="hidden md:table-cell w-1/6">语言</th>
-            <th class="hidden md:table-cell">备注</th>
+            <th v-show="!isBirthday" class="hidden md:table-cell">备注</th>
+            <th v-show="isBirthday">切片</th>
           </tr>
           </thead>
           <tbody>
-          <tr @click="copySongName(item.song)" v-for="(item, index) in showSongList" :key="index">
+          <tr @click="isBirthday ? null : copySongName(item.song)" v-for="(item, index) in showSongList" :key="index">
             <th>{{ item.song }}</th>
             <th>{{ item.artist }}</th>
             <th class="hidden md:table-cell">{{ item.lang }}</th>
-            <th class="hidden md:table-cell">{{ item.remark }}</th>
+            <th v-show="!isBirthday" class="hidden md:table-cell">{{ item.remark }}</th>
+            <th v-show="isBirthday">
+              <a
+                class="cursor-pointer flex justify-center"
+                target="_blank"
+                :href="item.biliVideo"
+                :title="'小紫 - ' + item.song"
+              >
+                <img src="@/assets/icon/bilibili.ico" :width="16" :height="16" alt="哔哩哔哩">
+              </a>
+            </th>
           </tr>
           </tbody>
         </table>
