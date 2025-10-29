@@ -185,23 +185,29 @@ function scrollWatch() {
         </div>
       </div>
 
-      <div
-        class="lang-selector my-6 mx-auto rounded-2xl border-fuchsia-700 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-4 gap-3 p-4 md:p-6 duration-500"
-      >
+      <div class="row-auto flex flex-wrap justify-evenly items-center my-6 mx-auto">
         <div
-          v-for="(lang, index) in langSet"
-          :key="index"
-          @click="switchLang(lang)"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
-          :class="nowLang === lang ? 'border border-fuchsia-500' : ''"
-        >{{ lang }}
+          class="lang-selector rounded-2xl border-fuchsia-700 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-4 md:p-6 duration-500 w-full md:w-3/4"
+        >
+          <div
+            v-for="(lang, index) in langSet"
+            :key="index"
+            @click="switchLang(lang)"
+            class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
+            :class="nowLang === lang ? 'border border-fuchsia-500' : ''"
+          >{{ lang }}
+          </div>
+          <div
+            @click="switchLang('')"
+            class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
+          >重置
+          </div>
         </div>
-        <div
-          @click="switchLang('')"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
-        >重置
+        <div class="hidden md:block p-4 w-1/4 lg:max-w-48">
+          <img src="@/assets/img/qrcode.png" class="max-h-48" alt="二维码">
         </div>
       </div>
+
       <div class="mb-6 grid md:grid-cols-4 md:gap-4 px-4 md:px-6">
         <input
           type="search"
