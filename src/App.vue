@@ -34,7 +34,7 @@ function handleVisibilityChange() {
 }
 
 function copySongName(song: string) {
-  navigator.clipboard.writeText(`点歌  ${song}`)
+  navigator.clipboard.writeText(`点歌 ${song}`)
 
   toast.success(`“${song}”已复制到剪贴板`, {
     timeout: 3000,
@@ -42,8 +42,8 @@ function copySongName(song: string) {
 }
 
 function randomCopy() {
-  let rand = Math.floor(Math.random() * (songList.value.length - 1))
-  copySongName(songList.value[rand].song)
+  let rand = Math.floor(Math.random() * (showSongList.value.length - 1))
+  copySongName(showSongList.value[rand].song)
 }
 
 function switchLang(lang: string) {
