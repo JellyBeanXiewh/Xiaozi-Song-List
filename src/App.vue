@@ -3,9 +3,11 @@ import { useToast } from 'vue-toastification'
 import { ref, onMounted } from 'vue'
 import SongList from './assets/json/song_list.json'
 import { useTitle } from '@/utils/useTitle'
+import CustomSelect from '@/components/CustomSelect.vue'
 
 const toast = useToast()
 const currentLang = ref('')
+const currentInitial = ref('')
 const searchContent = ref()
 const clientWidth = ref(document.documentElement.clientWidth)
 
@@ -14,6 +16,8 @@ const showSongList = ref()
 showSongList.value = songList.value
 
 const langSet = new Set(SongList.map((item: { lang: string }) => item.lang))
+const initialSet = new Set(SongList.map((item: { initial: string }) => item.initial).sort())
+const initialOptions = Array.from(initialSet).map((item) => Object({ value: item, label: item }))
 
 const originTitle = document.title
 const title = ref(originTitle)
@@ -55,14 +59,34 @@ function filterLang(lang: string) {
   }
   searchContent.value = null
   currentLang.value = lang
+  currentInitial.value = ''
+}
+
+function filterInitial(initial: string) {
+  showSongList.value = songList.value
+  if (initial !== '') {
+    showSongList.value = showSongList.value.filter(
+      (item: { initial: string }) => item.initial === initial,
+    )
+  }
+  searchContent.value = null
+  currentLang.value = ''
+  currentInitial.value = initial
+}
+
+function resetShowSongList() {
+  currentLang.value = ''
+  currentInitial.value = ''
+  showSongList.value = songList.value
 }
 
 const timeout = ref()
 
 function inputSearch(content: string) {
-  currentLang.value = ''
   clearTimeout(timeout.value)
   timeout.value = setTimeout(() => {
+    currentLang.value = ''
+    currentInitial.value = ''
     showSongList.value = songList.value
     if (content == '' || content == null) return
     showSongList.value = showSongList.value.filter(
@@ -197,8 +221,15 @@ function scrollWatch() {
           :class="currentLang === lang ? 'ring-1 ring-fuchsia-500' : ''"
         >{{ lang }}
         </div>
+        <custom-select
+          v-model="currentInitial"
+          :options="initialOptions"
+          placeholder="选择首字母"
+          class="rounded-2xl duration-500 hover:shadow-lg"
+          @change="filterInitial(currentInitial)"
+        ></custom-select>
         <div
-          @click="filterLang('')"
+          @click="resetShowSongList"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
         >重置</div>
       </div>

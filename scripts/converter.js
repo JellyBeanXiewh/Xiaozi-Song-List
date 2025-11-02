@@ -2,6 +2,11 @@ import assert from 'assert'
 import path from 'path'
 import fs from 'fs'
 import ExcelJS from 'exceljs'
+import cnchar from 'cnchar'
+
+([ 'cnchar-poly', 'cnchar-trad', ]).map(id => import(id)).forEach(f => cnchar.use(f))
+
+const getSpell = (str) => cnchar.spell(str)
 
 const src = path.resolve('scripts/song_list.xlsx')
 const dst = path.resolve('src/assets/json/song_list.json')
@@ -52,6 +57,15 @@ const loadSongList = async (src, dst) => {
               const nm = super.parse(d)
               return (console.log(nm), assert(nm, 'song not found'), nm)
             },
+            post: {
+              initial: (v, d) => {
+                let _initial = getSpell(v)[0]?.toUpperCase() ?? ''
+                if (_initial < 'A' || _initial > 'Z') {
+                  _initial = '#'
+                }
+                return _initial
+              }
+            }
           }, rowParsers.song))
       }
 
@@ -60,7 +74,11 @@ const loadSongList = async (src, dst) => {
         parse(r) {
           let d = {}
           Object.entries(this.rowParsers).forEach(([k0, p0]) => {
-            d[k0] = p0.parse(r)
+            const v = p0.parse(r)
+            p0.post && Object.entries(p0.post).forEach(([k1, p1,]) => {
+              d[k1] = p1(v, r)
+            })
+            d[k0] = v
           })
           return d
         },
