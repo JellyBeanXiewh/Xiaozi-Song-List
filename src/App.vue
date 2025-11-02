@@ -77,6 +77,7 @@ function filterInitial(initial: string) {
 function resetShowSongList() {
   currentLang.value = ''
   currentInitial.value = ''
+  searchContent.value = ''
   showSongList.value = songList.value
 }
 
