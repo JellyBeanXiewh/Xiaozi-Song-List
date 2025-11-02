@@ -5,7 +5,7 @@ import SongList from './assets/json/song_list.json'
 import { useTitle } from '@/utils/useTitle'
 
 const toast = useToast()
-const nowLang = ref('')
+const currentLang = ref('')
 const searchContent = ref()
 const clientWidth = ref(document.documentElement.clientWidth)
 
@@ -46,7 +46,7 @@ function randomCopy() {
   copySongName(showSongList.value[rand].song)
 }
 
-function switchLang(lang: string) {
+function filterLang(lang: string) {
   showSongList.value = songList.value
   if (lang !== '') {
     showSongList.value = showSongList.value.filter(
@@ -54,12 +54,13 @@ function switchLang(lang: string) {
     )
   }
   searchContent.value = null
-  nowLang.value = lang
+  currentLang.value = lang
 }
 
 const timeout = ref()
 
 function inputSearch(content: string) {
+  currentLang.value = ''
   clearTimeout(timeout.value)
   timeout.value = setTimeout(() => {
     showSongList.value = songList.value
@@ -191,16 +192,15 @@ function scrollWatch() {
         <div
           v-for="(lang, index) in langSet"
           :key="index"
-          @click="switchLang(lang)"
+          @click="filterLang(lang)"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
-          :class="nowLang === lang ? 'border border-fuchsia-500' : ''"
+          :class="currentLang === lang ? 'ring-1 ring-fuchsia-500' : ''"
         >{{ lang }}
         </div>
         <div
-          @click="switchLang('')"
+          @click="filterLang('')"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
-        >重置
-        </div>
+        >重置</div>
       </div>
       <div class="mb-6 grid md:grid-cols-4 md:gap-4 px-4 md:px-6">
         <input
@@ -208,7 +208,7 @@ function scrollWatch() {
           placeholder="搜索"
           @input="inputSearch(searchContent)"
           v-model="searchContent"
-          class="bg-white md:col-span-3 rounded-2xl w-full mb-3 md:mb-0 h-10 px-4 text-black cursor-text"
+          class="bg-white md:col-span-3 rounded-2xl w-full mb-3 md:mb-0 h-10 px-4 text-black cursor-text focus:outline-none focus:ring-1 focus:ring-fuchsia-500"
         >
         <div
           @click="randomCopy()"
