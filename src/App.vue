@@ -38,7 +38,7 @@ function handleVisibilityChange() {
 }
 
 function copySongName(song: string) {
-  navigator.clipboard.writeText(`点歌 ${song}`)
+  navigator.clipboard.writeText(song)
 
   toast.success(`“${song}”已复制到剪贴板`, {
     timeout: 3000,
