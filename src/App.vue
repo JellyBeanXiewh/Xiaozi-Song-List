@@ -16,8 +16,9 @@ const showSongList = ref()
 showSongList.value = songList.value
 
 const langSet = new Set(SongList.map((item: { lang: string }) => item.lang))
+const langOptions = Array.from(langSet).map((lang: string) => Object({ value: lang, label: lang }))
 const initialSet = new Set(SongList.map((item: { initial: string }) => item.initial).sort())
-const initialOptions = Array.from(initialSet).map((item) => Object({ value: item, label: item }))
+const initialOptions = Array.from(initialSet).map((initial: string) => Object({ value: initial, label: initial }))
 
 const originTitle = document.title
 const title = ref(originTitle)
@@ -50,27 +51,20 @@ function randomCopy() {
   copySongName(showSongList.value[rand].song)
 }
 
-function filterLang(lang: string) {
+function songFilter(lang: string = '', initial: string = '') {
   showSongList.value = songList.value
   if (lang !== '') {
     showSongList.value = showSongList.value.filter(
       (item: { lang: string }) => item.lang === lang,
     )
   }
-  searchContent.value = null
-  currentLang.value = lang
-  currentInitial.value = ''
-}
-
-function filterInitial(initial: string) {
-  showSongList.value = songList.value
   if (initial !== '') {
     showSongList.value = showSongList.value.filter(
       (item: { initial: string }) => item.initial === initial,
     )
   }
   searchContent.value = null
-  currentLang.value = ''
+  currentLang.value = lang
   currentInitial.value = initial
 }
 
@@ -212,28 +206,28 @@ function scrollWatch() {
       </div>
 
       <div
-        class="lang-selector my-6 mx-auto rounded-2xl border-fuchsia-700 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-4 gap-3 p-4 md:p-6 duration-500"
+        class="lang-selector my-6 mx-auto rounded-2xl border-fuchsia-700 border-2 hover:shadow-lg grid grid-cols-2 md:grid-cols-3 gap-3 p-4 md:p-6 duration-500"
       >
-        <div
-          v-for="(lang, index) in langSet"
-          :key="index"
-          @click="filterLang(lang)"
-          class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg"
-          :class="currentLang === lang ? 'ring-1 ring-fuchsia-500' : ''"
-        >{{ lang }}
-        </div>
+        <custom-select
+          v-model="currentLang"
+          :options="langOptions"
+          placeholder="选择语言"
+          class="rounded-2xl duration-500 hover:shadow-lg"
+          @change="songFilter(currentLang, currentInitial)"
+        ></custom-select>
         <custom-select
           v-model="currentInitial"
           :options="initialOptions"
           placeholder="选择首字母"
           class="rounded-2xl duration-500 hover:shadow-lg"
-          @change="filterInitial(currentInitial)"
+          @change="songFilter(currentLang, currentInitial)"
         ></custom-select>
         <div
           @click="resetShowSongList"
           class="option rounded-2xl h-10 leading-10 duration-500 bg-opacity-80 bg-white cursor-pointer hover:bg-opacity-100 hover:shadow-lg order-last"
         >重置</div>
       </div>
+
       <div class="mb-6 grid md:grid-cols-4 md:gap-4 px-4 md:px-6">
         <input
           type="search"
